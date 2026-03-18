@@ -207,8 +207,8 @@ function atlosanUtes(pozicio1, pozicio2){
             break;
     }
 
-    let fuggolegesKulonbseg = pozicio1[1]-pozicio2[1];
-    let vizszintesKulonbseg = betu1-betu2;
+    let fuggolegesKulonbseg = Math.abs(pozicio1[1]-pozicio2[1]);
+    let vizszintesKulonbseg = Math.abs(betu1-betu2);
 
     return fuggolegesKulonbseg ==  vizszintesKulonbseg;
 }
