@@ -42,7 +42,7 @@ function rendez(aktGombID, kattintasokSzama, lista) {
     kattintasokSzama[aktGombID] += 1;
 }
 
-function egyenesenUtes(pozicio1, pozicio2) {
+export function egyenesenUtes(pozicio1, pozicio2) {
         if (pozicio1[0] == pozicio2[0]) {
             return true;
         } else if (pozicio1[1] == pozicio2[1]) {
@@ -52,7 +52,7 @@ function egyenesenUtes(pozicio1, pozicio2) {
         }
     }
 
-function atlosanUtes(pozicio1, pozicio2){
+export function atlosanUtes(pozicio1, pozicio2){
     let betu1 = 0
     let betu2 = 0
 
@@ -115,4 +115,25 @@ function atlosanUtes(pozicio1, pozicio2){
     let vizszintesKulonbseg = Math.abs(betu1-betu2);
 
     return fuggolegesKulonbseg ==  vizszintesKulonbseg;
+}
+
+export function utiE() {
+    const okGomb = document.querySelector("button");
+
+    okGomb.addEventListener("click",function(){
+
+        const pozicio1 = document.getElementById("pozicio1").value
+        const pozicio2 = document.getElementById("pozicio2").value
+
+        let egyenesenUti = egyenesenUtes(pozicio1,pozicio2);
+        let atlosanUti = atlosanUtes(pozicio1,pozicio2)
+
+        console.log(egyenesenUti)
+        console.log(atlosanUti)
+        if (egyenesenUti || atlosanUti) {
+            alert("A két bábu üti egymást!");
+        } else {
+            alert("A két bábu nem üti egymást!");
+        }
+    })
 }
