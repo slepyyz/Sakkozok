@@ -1,23 +1,41 @@
 import { atlosanUtes, egyenesenUtes } from "./fuggvenyek.js"
 
-export function egyenesTeszt(){
-    console.log("Egyenes ütés tesztek:")
-    console.assert(egyenesenUtes("a1", "a1") === true, "Hiba: Ugyanaz a pozíció")
-    console.assert(egyenesenUtes("a1", "a7") === true, "Hiba: Oszlop azonos")
-    console.assert(egyenesenUtes("a1", "h1") === true, "Hiba: Azonos Sor")
-    console.assert(egyenesenUtes("", "") === true, "Hiba: Nincs pozíció")
-    console.assert(egyenesenUtes("x123", "a2") === false, "Hiba: Nem létező mező")
-    console.log("Minden teszt lefutott")
+export function egyenesenUtesTeszt() {
+    const TESZTESETEK = [
+        { p1: "a1", p2: "a1", elvart: true, szoveg: "Ugyanaz a pozíció" },
+        { p1: "a1", p2: "a7", elvart: true, szoveg: "Oszlop azonos" },
+        { p1: "a1", p2: "h1", elvart: true, szoveg: "Azonos sor" },
+        { p1: "",   p2: "",   elvart: true, szoveg: "Nincs pozíció (hibakezelés teszt)" },
+        { p1: "x123", p2: "a2", elvart: false, szoveg: "Nem létező mező" },
+    ];
+
+    console.log("--- Egyenesen ütés tesztek ---");
+    TESZTESETEK.forEach((teszt, i) => {
+        let eredmeny = egyenesenUtes(teszt.p1, teszt.p2);
+        console.assert(
+            eredmeny === teszt.elvart,
+            `Hiba a ${i + 1}. tesztnél (${teszt.szoveg}): várt: ${teszt.elvart}, kapott: ${eredmeny}`
+        );
+    });
 }
 
-export function atlosTeszt(){
-    console.log("Átlósan ütés tesztek:")
-    console.assert(atlosanUtes("a1", "h8") === true, "Hiba: Helyes ütés")
-    console.assert(atlosanUtes("h8", "a1") === true, "Hiba: Helyes ütés")
-    console.assert(atlosanUtes("a8", "h1") === true, "Hiba: Helyes ütés")
-    console.assert(atlosanUtes("h1", "a8") === true, "Hiba: Helyes ütés")
-    console.assert(atlosanUtes("a1", "h1") === false, "Hiba: Nincs ütés")
-    console.assert(atlosanUtes("", "") === false, "Hiba: Nincs pozíció")
-    console.assert(atlosanUtes("x123", "a2") === true, "Hiba: Nem létező mező")
-    console.log("Minden teszt lefutott")
+export function atlosanUtesTeszt() {
+    const TESZTESETEK = [
+        { p1: "a1", p2: "h8", elvart: true,  szoveg: "Helyes átlós ütés (fel-jobbra)" },
+        { p1: "h8", p2: "a1", elvart: true,  szoveg: "Helyes átlós ütés (le-balra)" },
+        { p1: "a8", p2: "h1", elvart: true,  szoveg: "Helyes átlós ütés (le-jobbra)" },
+        { p1: "h1", p2: "a8", elvart: true,  szoveg: "Helyes átlós ütés (fel-balra)" },
+        { p1: "a1", p2: "h1", elvart: false, szoveg: "Nincs átlós ütés (vízszintes)" },
+        { p1: "",   p2: "",   elvart: false, szoveg: "Nincs pozíció" },
+        { p1: "x123", p2: "a2", elvart: true, szoveg: "Nem létező mező" },
+    ];
+
+    console.log("--- Átlósan ütés tesztek ---");
+    TESZTESETEK.forEach((teszt, i) => {
+        let eredmeny = atlosanUtes(teszt.p1, teszt.p2);
+        console.assert(
+            eredmeny === teszt.elvart,
+            `Hiba a ${i + 1}. tesztnél (${teszt.szoveg}): várt: ${teszt.elvart}, kapott: ${eredmeny}`
+        );
+    });
 }
